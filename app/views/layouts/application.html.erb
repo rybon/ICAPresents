@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
+
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title><%= content_for?(:title) ? yield(:title) : "ICA Presents" %></title>
+
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body class='use-fastclick' data-ica_presents_begins="<%= Home.first.ica_presents_begins.utc.to_i * 1000 %>">
+
+    <header>
+      <div class="row">
+        <%= link_to image_tag('/assets/logo1.png', width: '20%', height: '20%'), '/' %>
+        <div class="timer">
+          <div class="element">
+            <div class="top">Dag</div>
+            <div id="days">0</div>
+          </div>
+
+          <div class="separator">
+            <div class="top">&nbsp;</div>
+            <div>\</div>
+          </div>
+
+          <div class="element">
+            <div class="top">Uur</div>
+            <div id="hours">0</div>
+          </div>
+
+          <div class="separator">
+            <div class="top">&nbsp;</div>
+            <div>\</div>
+          </div>
+
+          <div class="element">
+            <div class="top">Min</div>
+            <div id="minutes">0</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <% if flash[:notice] %>
+    <div class="row">
+      <div data-alert class="alert-box">
+         <%= flash[:notice] %>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="row no-phone">
+      <% unless current_user %>
+        <%= link_to 'Login met Facebook', '/auth/facebook', class: 'small button logout' %>
+      <% else %>
+        <% if !admin? %>
+        <% if current_user.try(:votes) %>
+        <%= link_to 'Je stemmen bekijken', my_votes_path, class: 'small button logout' %>
+        <% end %>
+        <% else %>
+        <%= link_to 'Home pagina beheren', edit_home_path(Home.first), class: 'small button logout' %>
+        <%= link_to 'Bericht toevoegen', new_message_path, class: 'small button logout' %>
+        <% end %>
+        <% if !admin? and current_user.project %>
+        <% if current_user.project.try(:id) %>
+        <%= link_to 'Je project bijwerken', edit_project_path(current_user.project), class: 'small button logout' %>
+        <% else %>
+        <%= link_to 'Project toevoegen', new_project_path, class: 'small button logout' %>
+        <% end %>
+        <% else %>
+        <%= link_to 'Project toevoegen', new_project_path, class: 'small button logout' %>
+        <% end %>
+        <%= link_to 'Uitloggen', signout_path, class: 'small button logout' %>
+      <% end %>
+    </div>
+
+    <div class="row phone">
+      <div class="large-12 columns">
+      <%= link_to raw('<i class="icon-home pull-left"></i>Home'), '/', class: 'button expand' %>
+      <%= link_to raw('<i class="icon-list-alt pull-left"></i>Projecten'), projects_path, class: 'button expand' %>
+      <% if admin? %>
+      <%= link_to raw('<i class="icon-comments pull-left"></i>Berichten'), messages_path, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-trophy pull-left"></i>De stand'), votes_path, class: 'button expand' %>
+      <% end %>
+      <% unless current_user %>
+        <%= link_to raw('<i class="icon-facebook-sign pull-left"></i>Login met Facebook'), '/auth/facebook', class: 'button expand' %>
+      <% else %>
+        <% if !admin? %>
+        <% if current_user.try(:votes) %>
+        <% end %>
+        <% else %>
+        <% end %>
+        <% if !admin? and current_user.project %>
+        <% if current_user.project.try(:id) %>
+        <% else %>
+        <% end %>
+        <% else %>
+        <% end %>
+        <%= link_to raw('<i class="icon-signout pull-left"></i>Uitloggen'), signout_path, class: 'button expand' %>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-8 columns">
+        <%= yield %>
+      </div>
+      <div class="large-4 columns menu">
+        <div class="no-phone"> 
+        <%= link_to raw('<i class="icon-home pull-left"></i>Home'), '/', class: 'button expand' %>
+        <%= link_to raw('<i class="icon-list-alt pull-left"></i>Projecten'), projects_path, class: 'button expand' %>
+        <% if admin? %>
+        <%= link_to raw('<i class="icon-comments pull-left"></i>Berichten'), messages_path, class: 'button expand' %>
+        <%= link_to raw('<i class="icon-trophy pull-left"></i>De stand'), votes_path, class: 'button expand' %>
+        <% end %>
+        </div>
+        <a class="twitter-timeline"  href="https://twitter.com/search?q=%23icapresents"  data-widget-id="348142153492475904">Tweets over "#icapresents"</a>
+        <div class="image-box">  
+          <%= image_tag '/assets/logo2.png' %>
+        </div>
+        <div class="form-box">
+          <% unless current_user %>
+          <%= form_tag admin_signin_path, autocomplete: 'off' do %>
+            <h4>Inloggen</h4>
+            <div class="field">
+              <%= email_field_tag :auth_key, nil, placeholder: 'E-mailadres' %>
+            </div>
+            <div class="field">
+              <%= password_field_tag :password, nil, placeholder: 'Wachtwoord' %>
+            </div>
+            <div class="actions"><%= submit_tag "Aanmelden", class: 'small button' %></div>
+          <% end %>
+          <% else %>
+          <h4>Uitloggen</h4>
+          <p><%= current_user.name %></p>
+          <div class="actions"><%= link_to 'Afmelden', signout_path, class: 'small button' %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row phone">
+      <div class="large-12 columns">
+      <% unless current_user %>
+      <% else %>
+        <% if !admin? %>
+          <% if current_user.try(:votes) %>
+            <%= link_to 'Je stemmen bekijken', my_votes_path, class: 'button expand' %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Home pagina beheren', edit_home_path(Home.first), class: 'button expand' %>
+            <%= link_to 'Bericht toevoegen', new_message_path, class: 'button expand' %>
+        <% end %>
+        <% if !admin? and current_user.project %>
+          <% if current_user.project.try(:id) %>
+            <%= link_to 'Je project bijwerken', edit_project_path(current_user.project), class: 'button expand' %>
+          <% else %>
+            <%= link_to 'Project toevoegen', new_project_path, class: 'button expand' %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Project toevoegen', new_project_path, class: 'button expand' %>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<div class="content">
+  <%= simple_form_for @project do |f| %>
+    <%= f.input :title, label: 'Wat is de titel van dit project?', placeholder: 'Geef de naam op waaronder je project bekend is' %>
+    <%= f.input :students, label: 'Welke student(en) is bij dit project betrokken?', placeholder: 'Geef je eigen naam en eventueel die van je medestudenten op' %>
+    <%= f.input :semester, label: 'Onder welk semester/minor valt dit project?', placeholder: 'Bijvoorbeeld: DMEC of DMP' %>
+    <%= f.input :location, label: 'Op welke locatie is dit project te bezichtigen?', placeholder: 'Bijvoorbeeld: ICA Lounge of Aula' %>
+    <%= f.input :time, label: 'Op welk tijdstip is dit project te bezichtigen?', placeholder: 'Bijvoorbeeld: 14:00 - 16:00' %>
+    <%= f.input :description, label: 'Geef een korte beschrijving van dit project:', placeholder: 'Verzin een pakkende tekst.', input_html: { style: 'height: 200px;' } %>
+    <%= f.input :picture, label: 'Voer een URL van een afbeelding van dit project in:', placeholder: 'Tip: zet je afbeelding op Dropbox en kopieer de link' %>
+    <% if current_user.try(:admin?) %>
+      <%= f.input :approved, label: 'Goedgekeurd?' %>
+    <% end %>
+    <%= f.button :submit, value: 'Opslaan' %>
+    <% if controller.action_name == 'edit' %>
+    <%= link_to 'Project verwijderen', project_path(@project), method: :delete, data: { confirm: 'Weet je zeker dat je dit project wil verwijderen?' }, class: 'button logout' %>
+    <% end %>
+  <% end %>
+</div>

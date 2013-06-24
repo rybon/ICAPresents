@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Nieuw project op ICA Presents: <%= @title %></h1>
+    <p>
+      Dit project is zojuist toegevoegd door <%= @author %>. De volgende student(en) van het semester/minor <%= @semester %> zijn erbij betrokken: <%= @students %>.
+    </p>
+    <p>
+      Om het project te bekijken en goed te keuren, ga naar deze link: <%= link_to @url, @url %>. Log eventueel wel eerst in met dit e-mailadres en je wachtwoord.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<h1>De Stand</h1>
+<div id="standings" class="details">
+<small>Deze pagina ververst automatisch! Laatst ververst op: <strong><%= Time.zone.now.strftime('%H:%M') %></strong></small>
+<% @votes.each do |vote| %>  
+  <h3><%= vote.award.name %></h3>
+  <p>
+    <strong><%= link_to vote.project.title, project_path(vote.project.id) %></strong>
+    <br />
+    <%= ((vote.score.to_f / vote.award.votes.size.to_f) * 100).round %>% (<%= vote.score %> uit in totaal <%= vote.award.votes.size %> stemmen in deze categorie)
+  </p>
+<% end %>
+<% if @votes.size < Award.all.size %>
+  <p><strong>In de overige categorie(ën) zijn nog geen stemmen uitgebracht.</strong></p>
+<% end %>
+  <h5>Meeste stemmen over alle categorieën:</h5>
+  <p>
+    <strong><%= link_to @most_votes.project.title, project_path(@most_votes.project.id) %></strong>
+    <br />
+    <%= ((@most_votes.score.to_f / @total.to_f) * 100).round %>% (<%= @most_votes.score %> uit in totaal <%= @total %> stemmen)
+  </p>
+</div>

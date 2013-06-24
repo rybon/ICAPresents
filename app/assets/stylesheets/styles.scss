@@ -1,0 +1,291 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+
+body {
+  background-image: url('/assets/background.png')
+}
+
+abbr {
+  color: red;
+  border: none;
+}
+
+label {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+h1 {
+  text-transform: uppercase;
+  background-color: #ffd100;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+header {
+  img {
+    float: left;
+  }
+  .timer {
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 60px;
+  }
+  .element {
+    color: grey;
+    float: left;
+    text-align: center;
+    width: 100px;
+    font-size: 30px;
+    .top {
+      margin-bottom: 20px;
+    }
+  }
+  .separator {
+    color: #ffd100;
+    float: left;
+    text-align: center;
+    font-size: 100px;
+    margin-top: -70px;
+    font-weight: normal;
+  }
+  #days, #hours, #minutes { 
+    color: white;
+    font-size: 60px;
+  }
+  br {
+    clear: both;
+  }
+}
+
+.project-item {
+  background-color: white;
+  margin-bottom: 20px !important;
+  h2 {
+    text-transform: uppercase;
+    background-color: #ffd100;
+    margin-top: 0;
+    padding-left: 10px;
+    padding-bottom: 5px;
+  }
+  p {
+    padding: 0 20px 0 20px;
+  } 
+}
+
+.content {
+  background-color: rgba(0, 0, 0, .5);
+  padding: 20px 20px 0 20px;
+}
+.details {
+  background-color: white;
+  padding: 20px 20px 20px 20px;
+}
+
+.button {
+  text-transform: uppercase;
+  color: black;
+}
+button:hover, button:focus, .button:hover, .button:focus {
+  background-color: #ffd100;
+}
+
+.info {
+  color: white;
+  font-weight: bold;
+}
+
+.logout {
+  margin-left: 20px;
+}
+
+.clear {
+  clear: both;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+.top {
+  margin-top: 20px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+  margin-right: 20px;
+}
+
+.menu {
+  text-align: center;
+  .image-box {
+    width: 225px;
+    margin: auto;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, .7);
+    img {
+      padding: 20px 0 20px 0;
+    }
+  }
+  .form-box {
+    text-align: left;
+    margin: 20px 0 20px 0;
+    background-color: rgba(0, 0, 0, .5);
+    padding: 5px 20px 0 20px;
+    h4 {
+      text-transform: uppercase;
+      color: white;
+    }
+    p {
+      color: white;
+    }
+    .actions {
+      text-align: right;
+    }
+  }
+}
+
+.bx-wrapper {
+  padding: 0 20px 0 20px;
+  width: inherit !important;
+  text-align: center;
+  margin-bottom: 20px !important;
+  .bx-viewport {
+    width: inherit !important;
+  }
+}
+.bx-wrapper, .bx-viewport {
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: none !important;
+  border: none !important;
+  left: inherit !important;
+}
+
+.button {
+  i {
+    margin-left: 10px !important;
+    width: 25px !important;
+    margin-right: -35px !important;
+    font-size: 1.2em;
+  }
+}
+.large {
+  width: 50px !important;
+  color: black !important;
+  font-size: 36px !important;
+}
+.large:hover {
+  color: black !important;
+}
+.no-styling {
+  background: none !important;
+  border: none !important;
+}
+
+#votes .button {
+  border: 1px solid #646464;
+  color: white !important;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#646464),color-stop(100%,#000));
+  background-image: -webkit-linear-gradient(top,#646464,#000);
+  background-image: -moz-linear-gradient(top,#646464,#000);
+  background-image: -ms-linear-gradient(top,#646464,#000);
+  background-image: -o-linear-gradient(top,#646464,#000);
+  background-image: linear-gradient(top,#646464,#000);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#7d7e7d,endColorstr=#000);
+}
+
+#votes .button:hover, #votes .button:focus {
+  background-image: none;
+  color: white !important;
+  background-color: #000 !important;
+}
+
+.phone {
+  display: none;
+}
+/* We use this media query to add styles to any device that supports media queries */
+@media only screen { }
+
+/* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (max-width: 767px) {
+  header {
+    img {
+      width: 30%;
+      height: 30%;
+      margin: 10px;
+      margin-bottom: 20px;
+      float: left;
+    }
+    .timer {
+      margin-top: -10px;
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-left: 0px;
+    }
+    .element {
+      color: grey;
+      float: left;
+      text-align: center;
+      width: 50px;
+      font-size: 16px;
+      .top {
+        margin-bottom: 20px;
+      }
+    }
+    .separator {
+      color: #ffd100;
+      float: left;
+      text-align: center;
+      font-size: 50px;
+      margin-top: -25px;
+      font-weight: normal;
+    }
+    #days, #hours, #minutes { 
+      color: white;
+      font-size: 30px;
+    }
+    br {
+      clear: both;
+    }
+  }
+  .no-phone {
+    display: none;
+  }
+  .phone {
+    display: block;
+  }
+}
+
+/* Used to alter styles for screens at least 1280px wide. */
+@media only screen and (min-width: 1280px) {}
+
+/* Used to alter styles for screens at least 1440px wide. */
+@media only screen and (min-width: 1440px) {}
+
+/* Apply styles to screens in landscape orientation */
+@media only screen and (max-width: 767px) and (orientation: landscape) {
+  header .timer {
+    margin-top: 5px;
+    margin-left: 50px;
+  }
+}
+
+/* Apply styles to screens in portrait orientation */
+@media only screen and (orientation: portrait) {}
+
+/* We also use Modernizr to add a .touch class to the body when applicable */
+/* You can prepend this class to anything and it will style only for touch devices */
+.touch .your-element {}

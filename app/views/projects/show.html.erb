@@ -1,0 +1,36 @@
+<h1><%= @project.title %></h1>
+<div id="votes" class="details">
+  <%= image_tag @project.picture %>
+  <br /><br />
+  <% unless admin? %>
+  <h2>Breng je stem uit</h2>
+  <% @awards.each do |award| %>
+    <% if current_user %>
+    <% if current_user.votes.pluck(:award_id).include?(award.id) %>
+      <% if award.name.match(/tech/i) %>
+      <%= link_to raw('<i class="icon-wrench pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, class: 'button disabled expand' %>
+      <% elsif award.name.match(/concept/i) %>
+      <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, class: 'button disabled expand' %>
+      <% elsif award.name.match(/present/i) %>
+      <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, class: 'button disabled expand' %>
+      <% end %>
+    <% else %>
+      <% if award.name.match(/tech/i) %>
+      <%= link_to raw('<i class="icon-wrench pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Weet je zeker dat je in de categorie ' + award.name  + ' op ' + @project.title + ' wilt stemmen?' }, class: 'button expand' %>
+      <% elsif award.name.match(/concept/i) %>
+      <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Weet je zeker dat je in de categorie ' + award.name  + ' op ' + @project.title + ' wilt stemmen?' }, class: 'button expand' %>
+      <% elsif award.name.match(/present/i) %>
+      <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Weet je zeker dat je in de categorie ' + award.name  + ' op ' + @project.title + ' wilt stemmen?' }, class: 'button expand' %>
+      <% end %>
+  <% end %>
+  <% end %>
+  <% end %>
+  <% end %>
+  <p>
+    <strong>Student(en): </strong><%= @project.students %><br />
+    <strong>Semester/minor: </strong><%= @project.semester %><br />
+    <strong>Locatie: </strong><%= @project.location %><br />
+    <strong>Tijd: </strong><%= @project.time %>
+  </p>
+  <p><%= simple_format @project.description %></p>
+</div>

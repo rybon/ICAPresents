@@ -1,0 +1,5 @@
+<br /><br />
+<h5>Nog te verdelen stemmen van de huidige leden:</h5>
+<p>
+  <%= ((((Student.all.size.to_f * Award.all.size.to_f) - Vote.all.size.to_f) / (Student.all.size.to_f * Award.all.size.to_f)) * 100).round %>% (nog <%= (Student.all.size * Award.all.size) - Vote.all.size %> uit in totaal <%= (Student.all.size * Award.all.size) %> mogelijke stemmen zijn te verdelen)
+</p>
