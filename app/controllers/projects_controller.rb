@@ -92,7 +92,7 @@ class ProjectsController < ApplicationController
 
     def check_project
       unless admin?
-        if voting_allowed? and (params[:action] == 'new' or params[:action] == 'create')
+        if voting_allowed?.call and (params[:action] == 'new' or params[:action] == 'create')
           redirect_to projects_path, notice: 'ICA Presents is begonnen. Je kan geen project meer toevoegen.'
         elsif (params[:action] == 'new' or params[:action] == 'create') and current_user.project.try(:id)
           redirect_to projects_path, notice: 'Je hebt al een project toegevoegd.'

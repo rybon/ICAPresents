@@ -43,7 +43,7 @@ class VotesController < ApplicationController
     end
 
     def check_vote
-      if !voting_allowed?
+      if !voting_allowed?.call
         redirect_to projects_path, notice: 'Je mag op dit tijdstip nog niet stemmen. Wacht totdat ICA Presents is begonnen.'   
       elsif Award.all.size == current_user.votes.size
         redirect_to projects_path, notice: 'Je hebt al je stemmen uitgebracht. Je kan niet nogmaals stemmen.'
