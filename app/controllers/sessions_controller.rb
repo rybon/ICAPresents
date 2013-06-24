@@ -23,15 +23,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if session[:student_id]
-      session[:student_id] = nil
-    elsif session[:teacher_id]
-      session[:teacher_id] = nil
-    end
+    reset_session
     redirect_to root_url, notice: "Tot ziens!"
   end
 
   def error
+    reset_session
     redirect_to root_url, notice: "Sorry, er ging iets fout bij je aanmelding."
   end
 end
