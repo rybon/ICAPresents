@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
       if @project.approved
         redirect_to projects_path, notice: 'Project is toegevoegd.'
       else
-        redirect_to projects_path, notice: 'Project is toegevoegd, maar nog niet toegevoegd.'
+        redirect_to projects_path, notice: 'Project is toegevoegd, maar nog niet goedgekeurd.'
       end
     else
       render action: 'new'
