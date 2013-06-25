@@ -4,6 +4,9 @@
   <br /><br />
   <% unless admin? %>
   <h2>Breng je stem uit</h2>
+  <% unless current_user %>
+  <p>Log eerst in met Facebook om te kunnen stemmen.</p>
+  <% end %>
   <% @awards.each do |award| %>
     <% if current_user %>
     <% if current_user.votes.pluck(:award_id).include?(award.id) %>

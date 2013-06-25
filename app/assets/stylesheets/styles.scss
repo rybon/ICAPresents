@@ -202,10 +202,12 @@ button:hover, button:focus, .button:hover, .button:focus {
   background-image: -o-linear-gradient(top,#646464,#000);
   background-image: linear-gradient(top,#646464,#000);
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#7d7e7d,endColorstr=#000);
+  -webkit-transition: none !important;
+  transition: none !important;
 }
 
 #votes .button:hover, #votes .button:focus {
-  background-image: none;
+  background-image: none !important;
   color: white !important;
   background-color: #000 !important;
 }
