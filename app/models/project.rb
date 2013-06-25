@@ -3,4 +3,5 @@ class Project < ActiveRecord::Base
   has_many :votes, dependent: :destroy
 
   validates_presence_of :title, :students, :semester, :location, :time, :description, :picture, message: 'Mag niet leeg zijn.'
+  validates_length_of :students, maximum: 255, message: 'Mag niet langer dan 255 tekens zijn.'
 end
