@@ -5,7 +5,7 @@
 <% else %>
   <p>Je hebt al je stemmen uitgebracht.</p>
 <% end %>
-<% Award.all.order('id').each do |award| %>  
+<% Award.all.order(:id).each do |award| %>  
   <h3><%= award.name %></h3>
   <p>
     <% if current_user.votes and current_user.votes.pluck(:award_id).include?(award.id) %>

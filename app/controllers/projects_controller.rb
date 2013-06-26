@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
         redirect_to projects_path, notice: 'Project is nog niet goedgekeurd.'
       end
     end
-    @awards = Award.all
+    @awards = Award.all.order(:id)
   end
 
   # GET /projects/new
