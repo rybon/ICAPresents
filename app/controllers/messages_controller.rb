@@ -29,7 +29,7 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message = Message.find(params[:id])
+    @message = Message.where(id: params[:id]).first
     if @message.destroy
       redirect_to messages_path, notice: 'Het bericht is verwijderd.'
     else

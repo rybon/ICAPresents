@@ -15,11 +15,11 @@
 
   	<title><%= content_for?(:title) ? yield(:title) : "ICA Presents" %></title>
     <%= favicon_link_tag '/favicon.ico' %>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <%= javascript_tag '!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");' %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -101,17 +101,6 @@
       <% unless current_user %>
         <%= link_to raw('<i class="icon-facebook-sign pull-left"></i>Login met Facebook'), '/auth/facebook', class: 'button expand' %>
       <% else %>
-        <% if !admin? %>
-        <% if current_user.try(:votes) %>
-        <% end %>
-        <% else %>
-        <% end %>
-        <% if !admin? and current_user.project %>
-        <% if current_user.project.try(:id) %>
-        <% else %>
-        <% end %>
-        <% else %>
-        <% end %>
         <%= link_to raw('<i class="icon-signout pull-left"></i>Uitloggen'), signout_path, class: 'button expand' %>
       <% end %>
       </div>
@@ -157,26 +146,25 @@
 
     <div class="row phone">
       <div class="large-12 columns">
-      <% unless current_user %>
-      <% else %>
-        <% if !admin? %>
-          <% if current_user.try(:votes) %>
-            <%= link_to 'Je stemmen bekijken', my_votes_path, class: 'button expand' %>
+        <% if current_user %>
+          <% if !admin? %>
+            <% if current_user.try(:votes) %>
+              <%= link_to 'Je stemmen bekijken', my_votes_path, class: 'button expand' %>
+            <% end %>
+          <% else %>
+            <%= link_to 'Home pagina beheren', edit_home_path(Home.first), class: 'button expand' %>
+              <%= link_to 'Bericht toevoegen', new_message_path, class: 'button expand' %>
           <% end %>
-        <% else %>
-          <%= link_to 'Home pagina beheren', edit_home_path(Home.first), class: 'button expand' %>
-            <%= link_to 'Bericht toevoegen', new_message_path, class: 'button expand' %>
-        <% end %>
-        <% if !admin? and current_user.project %>
-          <% if current_user.project.try(:id) %>
-            <%= link_to 'Je project bijwerken', edit_project_path(current_user.project), class: 'button expand' %>
+          <% if !admin? %>
+            <% if current_user.project.try(:id) %>
+              <%= link_to 'Je project bijwerken', edit_project_path(current_user.project), class: 'button expand' %>
+            <% else %>
+              <%= link_to 'Project toevoegen', new_project_path, class: 'button expand' %>
+            <% end %>
           <% else %>
             <%= link_to 'Project toevoegen', new_project_path, class: 'button expand' %>
           <% end %>
-        <% else %>
-          <%= link_to 'Project toevoegen', new_project_path, class: 'button expand' %>
         <% end %>
-      <% end %>
       </div>
     </div>
   </body>

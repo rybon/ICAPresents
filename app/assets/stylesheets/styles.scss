@@ -212,6 +212,10 @@ button:hover, button:focus, .button:hover, .button:focus {
   background-color: #000 !important;
 }
 
+#reminder {
+  font-style: italic;
+}
+
 .phone {
   display: none;
 }
@@ -219,7 +223,7 @@ button:hover, button:focus, .button:hover, .button:focus {
 @media only screen { }
 
 /* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) { }
 
 @media only screen and (max-width: 767px) {
   header {
@@ -279,14 +283,33 @@ button:hover, button:focus, .button:hover, .button:focus {
 
 /* Apply styles to screens in landscape orientation */
 @media only screen and (max-width: 767px) and (orientation: landscape) {
-  header .timer {
-    margin-top: 5px;
-    margin-left: 50px;
+  header {
+    .timer {
+      margin-top: 5px;
+      margin-left: 50px;
+    }
   }
 }
 
 /* Apply styles to screens in portrait orientation */
-@media only screen and (orientation: portrait) {}
+@media only screen and (orientation: portrait) and (min-width: 768px) {
+  header {
+    img {
+      width: 25%;
+      heigth: 25%;
+    }
+  }
+}
+
+/* Apply styles to screens in portrait orientation */
+@media only screen and (orientation: landscape) and (min-width: 768px) {
+  header {
+    img {
+      width: 19%;
+      heigth: 19%;
+    }
+  }
+}
 
 /* We also use Modernizr to add a .touch class to the body when applicable */
 /* You can prepend this class to anything and it will style only for touch devices */
