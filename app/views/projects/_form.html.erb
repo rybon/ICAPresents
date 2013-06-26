@@ -9,6 +9,8 @@
     <%= f.input :picture, label: 'Voer een URL van een afbeelding van dit project in:', placeholder: 'Tip: zet je afbeelding op Dropbox en kopieer de link', input_html: { type: 'url' } %>
     <% if current_user.try(:admin?) %>
       <%= f.input :approved, label: 'Goedgekeurd?' %>
+    <% elsif current_user.project.try(:id) and !current_user.project.try(:approved) %>
+        <p class="white">Je project is nog niet bekeken en/of goedgekeurd door de beheerders (<%= Teacher.pluck(:name).join(', ') %>).</p>
     <% end %>
     <%= f.button :submit, value: 'Opslaan' %>
     <% if controller.action_name == 'edit' %>

@@ -12,6 +12,11 @@
     </div>
   </div>
 </form>
+<% if current_user and current_user.project.try(:id) and !current_user.project.try(:approved) %>
+<div class="row project-item">
+  <p class="top">Je project <strong><%= current_user.project.title %></strong> is nog niet bekeken en/of goedgekeurd door de beheerders (<%= Teacher.pluck(:name).join(', ') %>) en staat daarom nog niet in het overzicht.</p>
+</div>
+<% end %>
 <% if @search.present? %>
 <div class="row project-item">
   <p class="top">Zoekresultaten voor: '<%= @search %>' (<%= @projects.length %>).</p>
