@@ -5,7 +5,7 @@ class VotesController < ApplicationController
   before_action :check_admin, only: [:index, :destroy]
 
   def index
-    @votes = Vote.find_by_sql('SELECT award_id, project_id, COUNT(*) AS score FROM votes GROUP BY project_id, award_id ORDER BY award_id, score DESC')
+    @votes = Vote.find_by_sql('SELECT DISTINCT ON(award_id) award_id, project_id, COUNT(*) AS score FROM votes GROUP BY project_id, award_id ORDER BY award_id, score DESC')
     @total = Vote.all.size
     @most_votes = Vote.find_by_sql('SELECT project_id, COUNT(*) AS score FROM votes GROUP BY project_id ORDER BY score DESC').first
     if @total == 0
