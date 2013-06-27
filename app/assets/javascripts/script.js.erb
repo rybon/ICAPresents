@@ -68,7 +68,7 @@ $(function() {
         $.getJSON('/messages.json?latest=' + latest, function(data) {
           var items = [];
           messages = data.concat(messages);
-          if ($('.bxslider').length && messages.length) {
+          if ($('.bxslider').length && data.length) {
             latest = messages[0]['id'];
             $.each(messages, function(key, val) {
               items.push('<li data-id="' + val.id + '">' + val.content + '</li>');
