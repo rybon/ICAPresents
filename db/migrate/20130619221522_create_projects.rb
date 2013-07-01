@@ -9,7 +9,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :time
       t.text :description
       t.string :picture
-      t.boolean :approved
+      t.boolean :approved, default: false
       t.timestamps
     end
 
