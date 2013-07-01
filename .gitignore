@@ -18,6 +18,7 @@
 /tmp
 
 # Ignore application configuration
+/db/schema.rb
 /db/seeds.rb
 /config/application.yml
 /.env
