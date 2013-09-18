@@ -6,7 +6,7 @@
     <%= f.input :location, label: 'Op welke locatie is dit project te bezichtigen?', placeholder: 'Bijvoorbeeld: ICA Lounge of Aula' %>
     <%= f.input :time, label: 'Op welk tijdstip is dit project te bezichtigen?', placeholder: 'Bijvoorbeeld: 14:00 - 16:00' %>
     <%= f.input :description, label: 'Geef een korte beschrijving van dit project:', placeholder: 'Verzin een pakkende tekst.', input_html: { style: 'height: 200px;' } %>
-    <%= f.input :picture, label: 'Voer een URL van een afbeelding van dit project in:', placeholder: 'Tip: zet je afbeelding op Dropbox en kopieer de link', input_html: { type: 'url' } %>
+    <%= f.input :picture, label: 'Voer een URL van een afbeelding van dit project in:', placeholder: 'Tip: zet je afbeelding op imgur.com en kopieer de link', input_html: { type: 'url' } %>
     <% if current_user.try(:admin?) %>
       <%= f.input :approved, label: 'Goedgekeurd?' %>
     <% elsif current_user.project.try(:id) and !current_user.project.try(:approved) %>
