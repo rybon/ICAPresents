@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -139,7 +140,7 @@ CREATE TABLE projects (
     "time" character varying(255),
     description text,
     picture character varying(255),
-    approved boolean,
+    approved boolean DEFAULT false,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
