@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -40,12 +40,12 @@ group :development do
   gem 'meta_request'
 end
 
-gem 'dotenv-rails', :groups => [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'rails_12factor', group: :production
 
 gem 'jquery-turbolinks'
 gem 'zurb-foundation'
-gem 'simple_form', '~> 3.0.0.rc'
+gem 'simple_form', '~> 3.0.0'
 gem 'bxslider-rails'
 gem 'omniauth-facebook'
 gem 'omniauth-identity'
