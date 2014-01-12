@@ -1,11 +1,11 @@
 <div class="row project-item">
-  <h2>Kort Nieuws</h2>
+  <h2>News</h2>
   <script id="messages" type="application/json">
     <%= raw @messages.to_json -%>
   </script>
   <ul class="bxslider">
     <% if @messages.empty? %>
-    <li>Volg hier het laatste nieuws over ICA Presents!</li>
+    <li>Here you can follow the latest news about ICA Presents!</li>
     <% end %>
     <% @messages.each do |message| %>
     <li data-id="<%= message.id %>"><%= message.content %></li>
@@ -13,13 +13,13 @@
   </ul>
 </div>
 <div class="row project-item">
-  <h2>Programma</h2>
+  <h2>Program</h2>
   <p>
     <%= simple_format @home.program %>
   </p>
 </div>
 <div class="row project-item">
-  <h2>Over ICA Presents</h2>
+  <h2>About ICA Presents</h2>
   <p>
     <%= simple_format @home.about %>
   </p>

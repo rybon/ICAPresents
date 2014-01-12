@@ -7,6 +7,6 @@ class NewProjectMailer < ActionMailer::Base
     @semester = project.semester
     @students = project.students
     @url = "http://www.icapresents.nl/projects/#{project.id}/edit"
-    mail(subject: "ICA Presents heeft een nieuw project: #{@title}")
+    mail(subject: "ICA Presents has a new project: #{@title}")
   end
 end

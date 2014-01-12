@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
         @search = params[:search]
         @projects = Project.where(approved: true).where('title ILIKE ? OR students ILIKE ? OR semester ILIKE ? OR description ILIKE ?', "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%" , "%#{params[:search]}%").order('created_at DESC')
       else
-        @projects = Project.where(approved: true).order('created_at DESC')
+        @projects = Project.where(approved: true).order('title')
       end
     end
   end
@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
   def show
     unless admin?
       unless @project.approved
-        redirect_to projects_path, notice: 'Project is nog niet goedgekeurd.'
+        redirect_to projects_path, notice: 'Project is not approved yet.'
       end
     end
     @awards = Award.all.order(:id)
@@ -55,9 +55,9 @@ class ProjectsController < ApplicationController
     if @project.save
       NewProjectMailer.new_project_email(@project).deliver
       if @project.approved
-        redirect_to projects_path, notice: 'Project is toegevoegd.'
+        redirect_to projects_path, notice: 'Project has been added.'
       else
-        redirect_to projects_path, notice: 'Project is toegevoegd, maar nog niet goedgekeurd.'
+        redirect_to projects_path, notice: 'Project has been added, but will have to be approved by an administrator.'
       end
     else
       render action: 'new'
@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     if @project.update(project_params)
-      redirect_to projects_path, notice: 'Project is bijgewerkt.'
+      redirect_to projects_path, notice: 'Changes saved.'
     else
       render action: 'edit'
     end
@@ -78,9 +78,9 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     if @project.destroy
-      redirect_to projects_path, notice: 'Project is verwijderd.'
+      redirect_to projects_path, notice: 'Project has been deleted.'
     else
-      redirect_to projects_path, notice: 'Project kon niet verwijderd worden.'
+      redirect_to projects_path, notice: 'Project could not be deleted.'
     end
   end
 
@@ -89,18 +89,18 @@ class ProjectsController < ApplicationController
     def set_project
       @project = Project.where(id: params[:id]).first
       unless @project
-        redirect_to projects_path, notice: 'Het project is niet gevonden. Mogelijk is het verwijderd.'
+        redirect_to projects_path, notice: 'Project not found.'
       end
     end
 
     def check_project
       unless admin?
         if voting_allowed?.call and (params[:action] == 'new' or params[:action] == 'create')
-          redirect_to projects_path, notice: 'ICA Presents is begonnen. Je kan geen project meer toevoegen.'
+          redirect_to projects_path, notice: 'ICA Presents has started. You can no longer add a project.'
         elsif (params[:action] == 'new' or params[:action] == 'create') and current_user.project.try(:id)
-          redirect_to projects_path, notice: 'Je hebt al een project toegevoegd.'
+          redirect_to projects_path, notice: 'You have already added a project.'
         elsif (params[:action] == 'edit' or params[:action] == 'update' or params[:action] == 'destroy') and (!current_user.project.try(:id) || current_user.project.try(:id) and current_user.project.try(:id) != @project.id)
-          redirect_to projects_path, notice: 'Je mag alleen je eigen project bijwerken of verwijderen.'
+          redirect_to projects_path, notice: 'You can only edit or delete your own project.'
         end
       end
     end

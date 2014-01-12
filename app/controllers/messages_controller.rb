@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.teacher = current_user
     if @message.save
-      redirect_to messages_path, notice: 'Het bericht is toegevoegd.'
+      redirect_to messages_path, notice: 'The message has been added.'
     else
       render action: 'new'
     end
@@ -31,16 +31,16 @@ class MessagesController < ApplicationController
   def destroy
     @message = Message.where(id: params[:id]).first
     if @message.destroy
-      redirect_to messages_path, notice: 'Het bericht is verwijderd.'
+      redirect_to messages_path, notice: 'The message has been deleted.'
     else
-      redirect_to messages_path, notice: 'Het bericht kon niet verwijderd worden.'
+      redirect_to messages_path, notice: 'The message could not be added.'
     end
   end
 
   private
     def check_admin
       unless admin?
-        redirect_to root_url, notice: 'Alleen beheerders hebben toegang.'
+        redirect_to root_url, notice: 'Only administrators have access.'
       end
     end
 

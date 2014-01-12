@@ -24,13 +24,13 @@
   </head>
 
   <body class='use-fastclick' data-ica_presents_begins="<%= Home.first.ica_presents_begins.utc.to_i * 1000 %>">
-
+    <div class="background"></div>
     <header>
       <div class="row">
         <%= link_to image_tag('/assets/logo1.png', width: '20%', height: '20%'), '/' %>
         <div class="timer">
           <div class="element">
-            <div class="top">Dag</div>
+            <div class="top">Day</div>
             <div id="days">0</div>
           </div>
 
@@ -40,7 +40,7 @@
           </div>
 
           <div class="element">
-            <div class="top">Uur</div>
+            <div class="top">Hour</div>
             <div id="hours">0</div>
           </div>
 
@@ -67,56 +67,56 @@
 
     <div class="row no-phone">
       <% unless current_user %>
-        <%= link_to 'Login met Facebook', '/auth/facebook', class: 'small button logout' %>
+        <%= link_to 'Sign in with Facebook', '/auth/facebook', class: 'small button logout' %>
       <% else %>
         <% if !admin? %>
         <% if current_user.try(:votes) %>
-        <%= link_to 'Je stemmen bekijken', my_votes_path, class: 'small button logout' %>
+        <%= link_to 'My votes', my_votes_path, class: 'small button logout' %>
         <% end %>
         <% else %>
-        <%= link_to 'Home pagina beheren', edit_home_path(Home.first), class: 'small button logout' %>
-        <%= link_to 'Bericht toevoegen', new_message_path, class: 'small button logout' %>
+        <%= link_to 'Edit homepage', edit_home_path(Home.first), class: 'small button logout' %>
+        <%= link_to 'Add a news message', new_message_path, class: 'small button logout' %>
         <% end %>
         <% if !admin? and current_user.project %>
         <% if current_user.project.try(:id) %>
-        <%= link_to 'Je project bijwerken', edit_project_path(current_user.project), class: 'small button logout' %>
+        <%= link_to 'Edit your project', edit_project_path(current_user.project), class: 'small button logout' %>
         <% else %>
-        <%= link_to 'Project toevoegen', new_project_path, class: 'small button logout' %>
+        <%= link_to 'Add a project', new_project_path, class: 'small button logout' %>
         <% end %>
         <% else %>
-        <%= link_to 'Project toevoegen', new_project_path, class: 'small button logout' %>
+        <%= link_to 'Add a project', new_project_path, class: 'small button logout' %>
         <% end %>
-        <%= link_to 'Uitloggen', signout_path, class: 'small button logout' %>
+        <%= link_to 'Sign out', signout_path, class: 'small button logout' %>
       <% end %>
     </div>
 
     <div class="row phone">
       <div class="large-12 columns">
       <%= link_to raw('<i class="icon-home pull-left"></i>Home'), '/', class: 'button expand' %>
-      <%= link_to raw('<i class="icon-list-alt pull-left"></i>Projecten'), projects_path, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-list-alt pull-left"></i>Projects'), projects_path, class: 'button expand' %>
       <% if admin? %>
-      <%= link_to raw('<i class="icon-comments pull-left"></i>Berichten'), messages_path, class: 'button expand' %>
-      <%= link_to raw('<i class="icon-trophy pull-left"></i>De stand'), votes_path, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-comments pull-left"></i>News messages'), messages_path, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-trophy pull-left"></i>Standings'), votes_path, class: 'button expand' %>
       <% end %>
       <% unless current_user %>
-        <%= link_to raw('<i class="icon-facebook-sign pull-left"></i>Login met Facebook'), '/auth/facebook', class: 'button expand' %>
+        <%= link_to raw('<i class="icon-facebook-sign pull-left"></i>Sign in with Facebook'), '/auth/facebook', class: 'button expand' %>
       <% else %>
-        <%= link_to raw('<i class="icon-signout pull-left"></i>Uitloggen'), signout_path, class: 'button expand' %>
+        <%= link_to raw('<i class="icon-signout pull-left"></i>Sign out'), signout_path, class: 'button expand' %>
       <% end %>
       </div>
     </div>
 
     <div class="row">
-      <div class="large-8 columns">
+      <div class="large-8 columns no-padding">
         <%= yield %>
       </div>
       <div class="large-4 columns menu">
         <div class="no-phone"> 
         <%= link_to raw('<i class="icon-home pull-left"></i>Home'), '/', class: 'button expand' %>
-        <%= link_to raw('<i class="icon-list-alt pull-left"></i>Projecten'), projects_path, class: 'button expand' %>
+        <%= link_to raw('<i class="icon-list-alt pull-left"></i>Projects'), projects_path, class: 'button expand' %>
         <% if admin? %>
-        <%= link_to raw('<i class="icon-comments pull-left"></i>Berichten'), messages_path, class: 'button expand' %>
-        <%= link_to raw('<i class="icon-trophy pull-left"></i>De stand'), votes_path, class: 'button expand' %>
+        <%= link_to raw('<i class="icon-comments pull-left"></i>News messages'), messages_path, class: 'button expand' %>
+        <%= link_to raw('<i class="icon-trophy pull-left"></i>Standings'), votes_path, class: 'button expand' %>
         <% end %>
         </div>
         <a class="twitter-timeline"  href="https://twitter.com/search?q=%23icapresents"  data-widget-id="348142153492475904">Tweets over "#icapresents"</a>
@@ -126,19 +126,19 @@
         <div class="form-box">
           <% unless current_user %>
           <%= form_tag admin_signin_path, autocomplete: 'off' do %>
-            <h4>Inloggen</h4>
+            <h4>Sign in</h4>
             <div class="field">
-              <%= email_field_tag :auth_key, nil, placeholder: 'E-mailadres' %>
+              <%= email_field_tag :auth_key, nil, placeholder: 'E-mail' %>
             </div>
             <div class="field">
-              <%= password_field_tag :password, nil, placeholder: 'Wachtwoord' %>
+              <%= password_field_tag :password, nil, placeholder: 'Password' %>
             </div>
-            <div class="actions"><%= submit_tag "Aanmelden", class: 'small button' %></div>
+            <div class="actions"><%= submit_tag "Sign in", class: 'small button' %></div>
           <% end %>
           <% else %>
-          <h4>Uitloggen</h4>
+          <h4>Sign out</h4>
           <p><%= current_user.name %></p>
-          <div class="actions"><%= link_to 'Afmelden', signout_path, class: 'small button' %></div>
+          <div class="actions"><%= link_to 'Sign out', signout_path, class: 'small button' %></div>
           <% end %>
         </div>
       </div>
@@ -149,20 +149,20 @@
         <% if current_user %>
           <% if !admin? %>
             <% if current_user.try(:votes) %>
-              <%= link_to 'Je stemmen bekijken', my_votes_path, class: 'button expand' %>
+              <%= link_to 'My votes', my_votes_path, class: 'button expand' %>
             <% end %>
           <% else %>
-            <%= link_to 'Home pagina beheren', edit_home_path(Home.first), class: 'button expand' %>
-              <%= link_to 'Bericht toevoegen', new_message_path, class: 'button expand' %>
+            <%= link_to 'Edit homepage', edit_home_path(Home.first), class: 'button expand' %>
+              <%= link_to 'Add a news message', new_message_path, class: 'button expand' %>
           <% end %>
           <% if !admin? %>
             <% if current_user.project.try(:id) %>
-              <%= link_to 'Je project bijwerken', edit_project_path(current_user.project), class: 'button expand' %>
+              <%= link_to 'Edit your project', edit_project_path(current_user.project), class: 'button expand' %>
             <% else %>
-              <%= link_to 'Project toevoegen', new_project_path, class: 'button expand' %>
+              <%= link_to 'Add a project', new_project_path, class: 'button expand' %>
             <% end %>
           <% else %>
-            <%= link_to 'Project toevoegen', new_project_path, class: 'button expand' %>
+            <%= link_to 'Add a project', new_project_path, class: 'button expand' %>
           <% end %>
         <% end %>
       </div>

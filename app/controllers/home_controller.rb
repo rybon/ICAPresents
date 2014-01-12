@@ -13,7 +13,7 @@ class HomeController < ApplicationController
   def update
     @home = Home.first
     if @home.update(home_params)
-      redirect_to root_url, notice: 'De home pagina is bijgewerkt.'
+      redirect_to root_url, notice: 'Changes saved.'
     else
       render action: 'edit'
     end

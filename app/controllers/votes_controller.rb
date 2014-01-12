@@ -9,7 +9,7 @@ class VotesController < ApplicationController
     @total = Vote.all.size
     @most_votes = Vote.find_by_sql('SELECT project_id, COUNT(*) AS score FROM votes GROUP BY project_id ORDER BY score DESC').first
     if @total == 0
-      redirect_to projects_path, notice: 'Er zijn nog geen stemmen uitgebracht.'
+      redirect_to projects_path, notice: 'No votes have been found yet.'
     end
   end
 
@@ -20,43 +20,43 @@ class VotesController < ApplicationController
     @vote = Vote.new(vote_params)
     @vote.student = current_user
     if @vote.save
-      redirect_to projects_path, notice: 'Je hebt je stem in de categorie ' + @vote.award.name + ' uitgebracht op het project ' + @vote.project.title +  '. Bedankt!'
+      redirect_to projects_path, notice: 'You have voted for ' + @vote.project.title + ' for the award ' + @vote.award.name +  '. Thank you for your vote!'
     else
-      redirect_to project_path(vote_params[:project_id]), notice: 'Je stem kon niet uitgebracht worden.'
+      redirect_to project_path(vote_params[:project_id]), notice: 'Your vote could not be saved.'
     end
   end
 
   def destroy
     @vote = Vote.find(params[:id])
     if @vote.destroy
-      redirect_to projects_path, notice: 'De stem is verwijderd.'
+      redirect_to projects_path, notice: 'The vote has been deleted.'
     else
-      redirect_to projects_path, notice: 'De stem kon niet verwijderd worden.'
+      redirect_to projects_path, notice: 'The vote could not be deleted.'
     end
   end
 
   private
     def no_admin
       if admin?
-        redirect_to projects_path, notice: 'Als beheerder mag je niet stemmen.'
+        redirect_to projects_path, notice: 'You can\'t vote as an administrator.'
       end
     end
 
     def check_vote
       if !voting_allowed?.call
-        redirect_to projects_path, notice: 'Je mag op dit tijdstip nog niet stemmen. Wacht totdat ICA Presents is begonnen.'   
+        redirect_to projects_path, notice: 'You can\'t vote yet, wait for ICA Presents to start!'
       elsif Award.all.size == current_user.votes.size
-        redirect_to projects_path, notice: 'Je hebt al je stemmen uitgebracht. Je kan niet nogmaals stemmen.'
+        redirect_to projects_path, notice: 'You have already voted, you can\'t vote again!'
       elsif Vote.exists?(student_id: current_user.id, award_id: vote_params[:award_id])
-        redirect_to projects_path, notice: 'Je hebt je stem al in deze categorie uitgebracht.'
+        redirect_to projects_path, notice: 'You have already voted for this award.'
       elsif Project.exists?(id: vote_params[:project_id], approved: false)
-        redirect_to projects_path, notice: 'Je kan niet stemmen op een niet goedgekeurd project.'
+        redirect_to projects_path, notice: 'You can\'t vote for a project that is yet to be approved.'
       end
     end
 
     def check_admin
       unless admin?
-        redirect_to projects_path, notice: 'Alleen beheerders hebben toegang.'
+        redirect_to projects_path, notice: 'Only administrators have access.'
       end
     end
 
