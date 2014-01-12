@@ -16,11 +16,14 @@ $(function() {
   var minutes = 0;
   var seconds = 0;
   var interval = false;
+  var started = true;
+
   function updateCountdown() {
     var now = new Date();
     now = now.getTime();
     var difference = (ICAPresentsDate - now) / 1000;
     if (difference > 0) {
+      started = false;
       if (!interval) {
         window.countdownInterval = setInterval(function() {
           updateCountdown();
@@ -43,6 +46,9 @@ $(function() {
         }
       }
       renderCountdown();
+    }else if(!started){
+        alert('ICA Presents has started, you can now vote for your favorite projects!');
+        started = true;
     }
   }
   function renderCountdown() {

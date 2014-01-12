@@ -1,7 +1,7 @@
-<h1>Nieuw bericht</h1>
+<h1>Add a news message</h1>
 <div class="content">
   <%= simple_form_for @message do |f| %>
-    <%= f.input :content, label: 'Kort en bondig bericht:', placeholder: 'Maximaal 255 tekens' %>
-    <%= f.button :submit, value: 'Opslaan' %>
+    <%= f.input :content, label: 'Short news message:', placeholder: 'Max. 255 characters' %>
+    <%= f.button :submit, value: 'Save' %>
   <% end %>
 </div>

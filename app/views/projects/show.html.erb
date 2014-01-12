@@ -3,9 +3,9 @@
   <%= image_tag @project.picture %>
   <br /><br />
   <% unless admin? %>
-  <h2>Breng je stem uit</h2>
+  <h2>Vote for this project?</h2>
   <% unless current_user %>
-  <p class="reminder">Log eerst in met Facebook om te kunnen stemmen.</p>
+  <p class="reminder">You have to be signed in using facebook to be able to vote.</p>
   <% end %>
   <% @awards.each do |award| %>
     <% if current_user %>
@@ -19,21 +19,21 @@
       <% end %>
     <% else %>
       <% if award.name.match(/tech/i) %>
-      <%= link_to raw('<i class="icon-wrench pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Weet je zeker dat je in de categorie ' + award.name  + ' op ' + @project.title + ' wilt stemmen?' }, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-wrench pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure that you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% elsif award.name.match(/concept/i) %>
-      <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Weet je zeker dat je in de categorie ' + award.name  + ' op ' + @project.title + ' wilt stemmen?' }, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure that you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% elsif award.name.match(/present/i) %>
-      <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Weet je zeker dat je in de categorie ' + award.name  + ' op ' + @project.title + ' wilt stemmen?' }, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure that you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% end %>
   <% end %>
   <% end %>
   <% end %>
   <% end %>
   <p>
-    <strong>Student(en): </strong><%= @project.students %><br />
+    <strong>Student(s): </strong><%= @project.students %><br />
     <strong>Semester/minor: </strong><%= @project.semester %><br />
-    <strong>Locatie: </strong><%= @project.location %><br />
-    <strong>Tijd: </strong><%= @project.time %>
+    <strong>Location: </strong><%= @project.location %><br />
+    <strong>Time: </strong><%= @project.time %>
   </p>
   <p><%= simple_format @project.description %></p>
 </div>

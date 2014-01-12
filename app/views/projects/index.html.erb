@@ -1,12 +1,12 @@
 <form action="/projects" method="get">
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-12 columns search">
       <div class="row collapse">
         <div class="small-10 columns">
-          <input type="text" name="search" placeholder="Zoek op titel, student, semester of beschrijving">
+          <input type="text" name="search" placeholder="Search for name, student, semester or description">
         </div>
         <div class="small-2 columns">
-          <input type="submit" class="button prefix" value="Zoek" />
+          <input type="submit" class="button prefix" value="Search" />
         </div>
       </div>
     </div>
@@ -14,37 +14,37 @@
 </form>
 <% if current_user and current_user.try(:project) and current_user.project.try(:id) and !current_user.project.try(:approved) %>
 <div class="row project-item">
-  <p class="top">Je project <strong><%= current_user.project.title %></strong> is nog niet bekeken en/of goedgekeurd door de beheerders (<%= Teacher.pluck(:name).join(', ') %>) en staat daarom nog niet in het overzicht.</p>
+  <p class="top">Your project <strong><%= current_user.project.title %></strong> hasn't been approved by an administrator yet. (<%= Teacher.pluck(:name).join(', ') %>)</p>
 </div>
 <% end %>
 <% if @search.present? %>
 <div class="row project-item">
-  <p class="top">Zoekresultaten voor: '<%= @search %>' (<%= @projects.length %>).</p>
+  <p class="top">Search results for: '<%= @search %>' (<%= @projects.length %>).</p>
 </div>
 <% end %>
 <% if @projects.empty? %>
 <div class="row project-item">
-  <p class="top">Er zijn geen (goedgekeurde) projecten gevonden.</p>
+  <p class="top">No (approved) projects found.</p>
 </div>
 <% end %>
 <% @projects.each do |project| %>
 <div class="row project-item">
   <h2><%= project.title %></h2>
   <p class="left">
-    <strong>Student(en):</strong> <%= project.students %>
+    <strong>Student(s):</strong> <%= project.students %>
     <br />
     <strong>Semester/minor:</strong> <%= project.semester %>
   </p>
   <div class="no-phone">
-    <%= link_to raw('<i class="large icon-plus-sign"></i>'), project_path(project), class: 'button right no-styling', style: 'width: 50px; margin-right: 50px;' %>
+    <%= link_to 'More info', project_path(project), class: 'button right no-styling', style: 'width: 50px; margin-right: 50px;' %>
   </div>
   <div class="phone" style="clear: both;">
-    <%= link_to raw('<i class="large icon-plus-sign"></i>'), project_path(project), class: 'button right no-styling', style: 'width: 50px; margin-right: 50px;' %>
+    <%= link_to 'More info', project_path(project), class: 'button right no-styling', style: 'width: 50px; margin-right: 50px;' %>
   </div>
   <% if admin? %>
-    <%= link_to raw('<i class="large icon-edit"></i>'), edit_project_path(project), class: 'button right no-styling', style: 'width: 50px; margin-top: 2px;' %>
+    <%= link_to 'Edit', edit_project_path(project), class: 'button right no-styling', style: 'width: 50px; margin-top: 2px;' %>
     <% unless project.approved %>
-    <p class="red clear">Dit project is nog niet goedgekeurd!</p>
+    <p class="red clear">This project hasn't been approved yet!</p>
     <% end %>
   <% end %>
 </div>

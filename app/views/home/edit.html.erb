@@ -1,9 +1,9 @@
-<h1>Home pagina bijwerken</h1>
-<div class="content">
+<h1>Edit homepage</h1>
+<div class="content home-edit">
   <%= simple_form_for @home do |f| %>
-    <%= f.input :ica_presents_begins, label: 'De datum en tijd waarop ICA Presents begint:' %>
-    <%= f.input :program, label: 'Tekst onder Programma:', input_html: { style: 'height: 200px;' } %>
-    <%= f.input :about, label: 'Tekst onder Over ICA Presents:', input_html: { style: 'height: 200px;' } %>
-    <%= f.button :submit, value: 'Opslaan' %>
+    <%= f.input :ica_presents_begins, label: 'Date and time for ICA Presents to start:' %>
+    <%= f.input :program, label: 'Text for Program:', input_html: { style: 'height: 200px;' } %>
+    <%= f.input :about, label: 'Text for About ICA Presents:', input_html: { style: 'height: 200px;' } %>
+    <%= f.button :submit, value: 'Save' %>
   <% end %>
 </div>

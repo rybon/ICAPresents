@@ -1,20 +1,20 @@
 <div class="content">
   <%= simple_form_for @project do |f| %>
-    <%= f.input :title, label: 'Wat is de titel van dit project?', placeholder: 'Geef de naam op waaronder je project bekend is' %>
-    <%= f.input :students, label: 'Welke student(en) is bij dit project betrokken?', placeholder: 'Geef je eigen naam en eventueel die van je medestudenten op' %>
-    <%= f.input :semester, label: 'Onder welk semester/minor valt dit project?', placeholder: 'Bijvoorbeeld: DMEC of DMP' %>
-    <%= f.input :location, label: 'Op welke locatie is dit project te bezichtigen?', placeholder: 'Bijvoorbeeld: ICA Lounge of Aula' %>
-    <%= f.input :time, label: 'Op welk tijdstip is dit project te bezichtigen?', placeholder: 'Bijvoorbeeld: 14:00 - 16:00' %>
-    <%= f.input :description, label: 'Geef een korte beschrijving van dit project:', placeholder: 'Verzin een pakkende tekst.', input_html: { style: 'height: 200px;' } %>
-    <%= f.input :picture, label: 'Voer een URL van een afbeelding van dit project in:', placeholder: 'Tip: zet je afbeelding op imgur.com en kopieer de link', input_html: { type: 'url' } %>
+    <%= f.input :title, label: 'What is the name of this project?', placeholder: 'Project name' %>
+    <%= f.input :students, label: 'Which students are involved in this project?', placeholder: 'Your name and the name of your project group members' %>
+    <%= f.input :semester, label: 'What is the semester/minor of the project?', placeholder: 'Example: DMEC or DMP' %>
+    <%= f.input :location, label: 'Where will the project be showcased?', placeholder: 'Example: ICA Lounge or Aula' %>
+    <%= f.input :time, label: 'At what time will the project be showcased?', placeholder: 'Example: 14:00 - 16:00' %>
+    <%= f.input :description, label: 'Write a short description about the project:', placeholder: 'Project description', input_html: { style: 'height: 200px;' } %>
+    <%= f.input :picture, label: 'Paste the URL of a project image:', placeholder: 'Tip: upload your image to imgur.com and paste the URL here', input_html: { type: 'url' } %>
     <% if current_user.try(:admin?) %>
-      <%= f.input :approved, label: 'Goedgekeurd?' %>
+      <%= f.input :approved, label: 'Approved?' %>
     <% elsif current_user.project.try(:id) and !current_user.project.try(:approved) %>
-        <p class="white">Je project is nog niet bekeken en/of goedgekeurd door de beheerders (<%= Teacher.pluck(:name).join(', ') %>).</p>
+        <p class="white">Your project hasn't been approved by an administrator yet. (<%= Teacher.pluck(:name).join(', ') %>).</p>
     <% end %>
-    <%= f.button :submit, value: 'Opslaan' %>
+    <%= f.button :submit, value: 'Save' %>
     <% if controller.action_name == 'edit' %>
-    <%= link_to 'Project verwijderen', project_path(@project), method: :delete, data: { confirm: 'Weet je zeker dat je dit project wil verwijderen?' }, class: 'button logout' %>
+    <%= link_to 'Delete project', project_path(@project), method: :delete, data: { confirm: 'Are you sure you want to delete this project?' }, class: 'button logout' %>
     <% end %>
   <% end %>
 </div>

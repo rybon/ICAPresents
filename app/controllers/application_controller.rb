@@ -13,11 +13,11 @@ class ApplicationController < ActionController::Base
     end
 
     def check_logged_in
-      redirect_to root_url, notice: "Log eerst in." unless current_user
+      redirect_to root_url, notice: "Sign in first." unless current_user
     end
 
     def check_logged_out
-      redirect_to root_url, notice: "Je bent al ingelogd." if current_user
+      redirect_to root_url, notice: "You're already signed in." if current_user
     end
 
     def admin?
