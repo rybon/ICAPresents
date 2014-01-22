@@ -1,5 +1,8 @@
 $(function() {
-  // twitter stuff
+  // disable page caching to make sure scripts runs correctly on every navigation
+  Turbolinks.pagesCached(0);
+
+  // twitter widget stuff
   $('#twitter-wjs').remove();
   $('body').removeAttr('data-twttr-rendered');
   $('head').append('<script id="twitter-wjs" src="http://platform.twitter.com/widgets.js"></script>');
