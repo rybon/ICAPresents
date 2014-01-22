@@ -19,7 +19,6 @@
     <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
-    <%= javascript_tag '!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");' %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -111,7 +110,7 @@
         <%= yield %>
       </div>
       <div class="large-4 columns menu">
-        <div class="no-phone"> 
+        <div class="no-phone">
         <%= link_to raw('<i class="icon-home pull-left"></i>Home'), '/', class: 'button expand' %>
         <%= link_to raw('<i class="icon-list-alt pull-left"></i>Projects'), projects_path, class: 'button expand' %>
         <% if admin? %>
@@ -120,13 +119,13 @@
         <% end %>
         </div>
         <a class="twitter-timeline"  href="https://twitter.com/search?q=%23icapresents"  data-widget-id="348142153492475904">Tweets over "#icapresents"</a>
-        <div class="image-box">  
+        <div class="image-box">
           <%= image_tag '/assets/logo2.png' %>
         </div>
         <div class="form-box">
           <% unless current_user %>
           <%= form_tag admin_signin_path, autocomplete: 'off' do %>
-            <h4>Sign in</h4>
+            <h4>Jury sign in</h4>
             <div class="field">
               <%= email_field_tag :auth_key, nil, placeholder: 'E-mail' %>
             </div>

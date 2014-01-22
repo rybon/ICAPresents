@@ -1,4 +1,9 @@
 $(function() {
+  // twitter stuff
+  $('#twitter-wjs').remove();
+  $('body').removeAttr('data-twttr-rendered');
+  $('head').append('<script id="twitter-wjs" src="http://platform.twitter.com/widgets.js"></script>');
+
   if (window.countdownInterval) {
     clearInterval(window.countdownInterval);
   }
