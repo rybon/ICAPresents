@@ -5,7 +5,7 @@
   <% unless admin? %>
   <h2>Vote for this project?</h2>
   <% unless current_user %>
-  <p class="reminder">You have to be signed in using facebook to be able to vote.</p>
+  <p class="reminder">You have to be signed in using Facebook to be able to vote.</p>
   <% end %>
   <% @awards.each do |award| %>
     <% if current_user %>
@@ -19,11 +19,11 @@
       <% end %>
     <% else %>
       <% if award.name.match(/tech/i) %>
-      <%= link_to raw('<i class="icon-wrench pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure that you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-wrench pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% elsif award.name.match(/concept/i) %>
-      <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure that you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% elsif award.name.match(/present/i) %>
-      <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure that you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
+      <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% end %>
   <% end %>
   <% end %>

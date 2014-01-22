@@ -3,10 +3,10 @@ $(function() {
     clearInterval(window.countdownInterval);
   }
   if (window.sliderInterval) {
-    clearInterval(window.sliderInterval); 
+    clearInterval(window.sliderInterval);
   }
   if (window.standingsInterval) {
-    clearInterval(window.standingsInterval); 
+    clearInterval(window.standingsInterval);
   }
 
   var ICAPresentsDate = new Date(parseInt($('body').attr('data-ica_presents_begins')));
@@ -41,12 +41,12 @@ $(function() {
       }
       if (difference >= 60) {
         minutes = Math.floor(difference / 60);
-        if(minutes < 59 && minutes > 1) {
+        if (minutes < 59 && minutes > 1) {
           minutes++;
         }
       }
       renderCountdown();
-    }else if(!started){
+    } else if (!started){
         alert('ICA Presents has started, you can now vote for your favorite projects!');
         started = true;
     }

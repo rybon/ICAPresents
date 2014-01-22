@@ -69,7 +69,7 @@ header {
     margin-top: -70px;
     font-weight: normal;
   }
-  #days, #hours, #minutes { 
+  #days, #hours, #minutes {
     color: white;
     font-size: 60px;
   }
@@ -90,7 +90,7 @@ header {
   }
   p {
     padding: 0 20px 0 20px;
-  } 
+  }
 }
 
 .home-edit{
@@ -119,6 +119,7 @@ header {
 }
 button:hover, button:focus, .button:hover, .button:focus {
   background-color: #ffd100;
+  color: #ffd100;
 }
 
 
@@ -292,7 +293,7 @@ button:hover, button:focus, .button:hover, .button:focus {
       margin-top: -25px;
       font-weight: normal;
     }
-    #days, #hours, #minutes { 
+    #days, #hours, #minutes {
       color: white;
       font-size: 30px;
     }
