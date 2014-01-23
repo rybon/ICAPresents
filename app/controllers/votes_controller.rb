@@ -11,6 +11,49 @@ class VotesController < ApplicationController
     if @total == 0
       redirect_to projects_path, notice: 'No votes have been found yet.'
     end
+    ### Other useful queries to list complete rankings of vote totals, or per award category. To be used in Navicat for easy export to .csv:
+    #
+    # Totals:
+    #
+    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes), 2) as Percentage
+    # from votes
+    # join projects on projects.id = votes.project_id
+    # group by Project
+    # window Results as (order by count(votes.id) desc)
+    # order by Rank
+    #
+    # Best Concept:
+    #
+    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 1), 2) as Percentage
+    # from votes
+    # join projects on projects.id = votes.project_id
+    # join awards on awards.id = votes.award_id
+    # where votes.award_id = 1
+    # group by votes.award_id, Project, Award
+    # window Results as (order by count(votes.id) desc)
+    # order by Rank
+    #
+    # Best Technical Execution:
+    #
+    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 2), 2) as Percentage
+    # from votes
+    # join projects on projects.id = votes.project_id
+    # join awards on awards.id = votes.award_id
+    # where votes.award_id = 2
+    # group by votes.award_id, Project, Award
+    # window Results as (order by count(votes.id) desc)
+    # order by Rank
+    #
+    # Best Presentation:
+    #
+    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 3), 2) as Percentage
+    # from votes
+    # join projects on projects.id = votes.project_id
+    # join awards on awards.id = votes.award_id
+    # where votes.award_id = 3
+    # group by votes.award_id, Project, Award
+    # window Results as (order by count(votes.id) desc)
+    # order by Rank
   end
 
   def show

@@ -1,6 +1,9 @@
 ICAPresents::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Prevents heroku run rake db:migrate error
+  config.active_record.schema_format = :ruby
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
