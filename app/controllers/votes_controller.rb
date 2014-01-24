@@ -5,9 +5,9 @@ class VotesController < ApplicationController
   before_action :check_admin, only: [:index, :destroy]
 
   def index
-    @votes = Vote.find_by_sql('SELECT DISTINCT ON(award_id) award_id, project_id, COUNT(*) AS score FROM votes GROUP BY project_id, award_id ORDER BY award_id, score DESC')
+    @votes = Vote.find_by_sql('SELECT DISTINCT ON(award_id) award_id, project_id, COUNT(id) AS score FROM votes GROUP BY project_id, award_id ORDER BY award_id, score DESC')
     @total = Vote.all.size
-    @most_votes = Vote.find_by_sql('SELECT project_id, COUNT(*) AS score FROM votes GROUP BY project_id ORDER BY score DESC').first
+    @most_votes = Vote.find_by_sql('SELECT project_id, COUNT(id) AS score FROM votes GROUP BY project_id ORDER BY score DESC').first
     if @total == 0
       redirect_to projects_path, notice: 'No votes have been found yet.'
     end
@@ -15,7 +15,7 @@ class VotesController < ApplicationController
     #
     # Totals:
     #
-    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes), 2) as Percentage
+    # select distinct dense_rank() over (Results) as Rank, projects.title as Project, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes), 2) as Percentage
     # from votes
     # join projects on projects.id = votes.project_id
     # group by Project
@@ -24,7 +24,7 @@ class VotesController < ApplicationController
     #
     # Best Concept:
     #
-    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 1), 2) as Percentage
+    # select distinct dense_rank() over (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 1), 2) as Percentage
     # from votes
     # join projects on projects.id = votes.project_id
     # join awards on awards.id = votes.award_id
@@ -35,7 +35,7 @@ class VotesController < ApplicationController
     #
     # Best Technical Execution:
     #
-    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 2), 2) as Percentage
+    # select distinct dense_rank() over (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 2), 2) as Percentage
     # from votes
     # join projects on projects.id = votes.project_id
     # join awards on awards.id = votes.award_id
@@ -46,7 +46,7 @@ class VotesController < ApplicationController
     #
     # Best Presentation:
     #
-    # select distinct dense_rank() OVER (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 3), 2) as Percentage
+    # select distinct dense_rank() over (Results) as Rank, projects.title as Project, awards.name as Award, count(votes.id) as Votes, round(100.0 * count(votes.id) / (select count(votes.id) from votes where votes.award_id = 3), 2) as Percentage
     # from votes
     # join projects on projects.id = votes.project_id
     # join awards on awards.id = votes.award_id
