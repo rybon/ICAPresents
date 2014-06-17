@@ -16,6 +16,8 @@
       <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, class: 'button disabled expand' %>
       <% elsif award.name.match(/present/i) %>
       <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, class: 'button disabled expand' %>
+      <% elsif award.name.match(/audience/i) %>
+      <%= link_to raw('<i class="icon-group pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, class: 'button disabled expand' %>
       <% end %>
     <% else %>
       <% if award.name.match(/tech/i) %>
@@ -24,6 +26,8 @@
       <%= link_to raw('<i class="icon-lightbulb pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% elsif award.name.match(/present/i) %>
       <%= link_to raw('<i class="icon-sun pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
+      <% elsif award.name.match(/audience/i) %>
+      <%= link_to raw('<i class="icon-group pull-left"></i>' + award.name), votes_path(award_id: award.id, project_id: @project.id), method: :post, data: { confirm: 'Are you sure you want to vote for ' + @project.title  + ' for the award ' + award.name + '?' }, class: 'button expand' %>
       <% end %>
   <% end %>
   <% end %>
