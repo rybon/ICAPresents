@@ -51,7 +51,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-identity'
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+# gem 'bcrypt', '~> 3.0.0'
 
 # Use unicorn as the app server
 gem 'unicorn'
