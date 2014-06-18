@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
 
     def voting_allowed?
-      lambda { ((Time.zone.now.utc.to_i * 1000) > (Home.first.ica_presents_begins.utc.to_i * 1000) and (Time.zone.now.utc.to_i * 1000) < ((Home.first.ica_presents_begins.utc.to_i * 1000) + (2.hours.to_i * 1000))) }
+      lambda { ((Time.zone.now.utc.to_i * 1000) > (Home.first.ica_presents_begins.utc.to_i * 1000) and (Time.zone.now.utc.to_i * 1000) < ((Home.first.ica_presents_begins.utc.to_i * 1000) + (3.hours.to_i * 1000))) }
     end
 
     helper_method :current_user, :check_logged_in, :check_logged_out, :admin?, :voting_allowed?

@@ -87,7 +87,7 @@ class VotesController < ApplicationController
 
     def check_vote
       if !voting_allowed?.call
-        redirect_to projects_path, notice: 'You can\'t vote yet, wait for ICA Presents to start!'
+        redirect_to projects_path, notice: 'You can only vote during ICA Presents!'
       elsif Award.all.size == current_user.votes.size
         redirect_to projects_path, notice: 'You have already voted, you can\'t vote again!'
       elsif Vote.exists?(student_id: current_user.id, award_id: vote_params[:award_id])
